@@ -1,0 +1,172 @@
+# =============================================================================
+# SentinelNet .gitignore
+# Python ML Research Project — Network Intrusion Detection
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Python
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+.installed.cfg
+pip-selfcheck.json
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Distribution
+*.tar.gz
+
+# -----------------------------------------------------------------------------
+# Jupyter Notebooks
+# -----------------------------------------------------------------------------
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# -----------------------------------------------------------------------------
+# Data — Raw data is never committed
+# -----------------------------------------------------------------------------
+data/raw/**
+data/interim/**
+data/processed/**
+
+# Keep directory structure
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!data/README.md
+
+# Common dataset formats
+*.csv.gz
+*.pcap
+*.pcapng
+*.parquet
+*.h5
+*.hdf5
+*.feather
+*.arrow
+
+# Large files
+*.zip
+*.tar
+*.tar.gz
+*.tar.bz2
+*.7z
+
+# -----------------------------------------------------------------------------
+# Models — Weights are never committed (use DVC or model registry)
+# -----------------------------------------------------------------------------
+models/**
+!models/.gitkeep
+
+# Common model formats
+*.pkl
+*.pickle
+*.joblib
+*.pt
+*.pth
+*.onnx
+*.pb
+*.h5
+*.keras
+*.safetensors
+
+# -----------------------------------------------------------------------------
+# Experiment Outputs
+# -----------------------------------------------------------------------------
+experiments/runs/
+experiments/logs/
+experiments/checkpoints/
+experiments/outputs/
+
+# Keep registry
+!experiments/registry.csv
+!experiments/.gitkeep
+
+# MLflow / W&B / other trackers
+mlruns/
+mlartifacts/
+wandb/
+.neptune/
+
+# -----------------------------------------------------------------------------
+# Results — Only committed after actual runs
+# -----------------------------------------------------------------------------
+results/metrics/**
+results/figures/**
+results/tables/**
+
+!results/metrics/.gitkeep
+!results/figures/.gitkeep
+!results/tables/.gitkeep
+
+# -----------------------------------------------------------------------------
+# IDE and Editor
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -----------------------------------------------------------------------------
+# Testing and Coverage
+# -----------------------------------------------------------------------------
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.cover
+.hypothesis/
+
+# -----------------------------------------------------------------------------
+# Type Checkers
+# -----------------------------------------------------------------------------
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyright/
+
+# -----------------------------------------------------------------------------
+# Documentation builds
+# -----------------------------------------------------------------------------
+docs/_build/
+site/
+
+# -----------------------------------------------------------------------------
+# OS
+# -----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# -----------------------------------------------------------------------------
+# Secrets and credentials — NEVER commit
+# -----------------------------------------------------------------------------
+.env
+.env.*
+secrets.yaml
+secrets.json
+credentials.json
+*.pem
+*.key
+*.crt

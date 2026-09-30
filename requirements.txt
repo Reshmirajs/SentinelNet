@@ -1,0 +1,99 @@
+# =============================================================================
+# SentinelNet — Python Dependencies
+# Network Intrusion Detection Research
+#
+# Install: pip install -r requirements.txt
+# Python: >= 3.10
+#
+# NOTE: Pin exact versions before each experiment run to ensure reproducibility.
+#       Use `pip freeze > requirements.lock` to capture the full resolved set.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Core Scientific Stack
+# -----------------------------------------------------------------------------
+numpy>=1.24,<2.0
+pandas>=2.0,<3.0
+scipy>=1.11,<2.0
+
+# -----------------------------------------------------------------------------
+# Machine Learning
+# -----------------------------------------------------------------------------
+scikit-learn>=1.3,<2.0
+
+# Deep learning — RESEARCH DECISION NEEDED: confirm framework preference
+# Uncomment the one approved by the research lead:
+# torch>=2.1,<3.0                # PyTorch
+# tensorflow>=2.14,<3.0          # TensorFlow / Keras
+# jax[cuda12_pip]>=0.4,<1.0      # JAX (GPU)
+
+# -----------------------------------------------------------------------------
+# Data I/O and Feature Engineering
+# -----------------------------------------------------------------------------
+pyarrow>=13.0,<15.0       # Parquet/Arrow support
+fastparquet>=2023.8        # Alternative Parquet engine
+h5py>=3.9,<4.0            # HDF5 support for large datasets
+openpyxl>=3.1             # Excel support (for result tables)
+
+# -----------------------------------------------------------------------------
+# Visualization
+# -----------------------------------------------------------------------------
+matplotlib>=3.7,<4.0
+seaborn>=0.12,<1.0
+plotly>=5.17              # Interactive plots
+
+# -----------------------------------------------------------------------------
+# Experiment Tracking
+# RESEARCH DECISION NEEDED: confirm tracking backend
+# -----------------------------------------------------------------------------
+# mlflow>=2.7               # MLflow experiment tracking
+# wandb>=0.16               # Weights & Biases
+# neptune-client>=1.8       # Neptune.ai
+
+# -----------------------------------------------------------------------------
+# Configuration Management
+# -----------------------------------------------------------------------------
+pyyaml>=6.0,<7.0
+omegaconf>=2.3,<3.0        # Hierarchical configs (Hydra-compatible)
+hydra-core>=1.3,<2.0       # Config composition framework
+
+# -----------------------------------------------------------------------------
+# Utilities
+# -----------------------------------------------------------------------------
+tqdm>=4.65                 # Progress bars
+rich>=13.0                 # Rich terminal output
+click>=8.1,<9.0            # CLI framework
+python-dotenv>=1.0         # .env file support
+joblib>=1.3                # Parallel processing and caching
+
+# -----------------------------------------------------------------------------
+# Network Traffic / PCAP Analysis
+# RESEARCH DECISION NEEDED: confirm packet analysis libraries
+# -----------------------------------------------------------------------------
+# scapy>=2.5                # Packet manipulation (if working with raw PCAPs)
+# dpkt>=1.9                 # Lightweight PCAP parsing
+# pyshark>=0.6              # Wireshark Python bindings
+
+# -----------------------------------------------------------------------------
+# Testing
+# -----------------------------------------------------------------------------
+pytest>=7.4,<9.0
+pytest-cov>=4.1
+pytest-xdist>=3.3          # Parallel test execution
+
+# -----------------------------------------------------------------------------
+# Code Quality
+# -----------------------------------------------------------------------------
+black>=23.0                # Code formatter
+isort>=5.12                # Import sorter
+flake8>=6.1                # Linter
+mypy>=1.5                  # Type checker
+pre-commit>=3.4            # Git hooks
+
+# -----------------------------------------------------------------------------
+# Jupyter / Notebooks
+# -----------------------------------------------------------------------------
+jupyter>=1.0
+jupyterlab>=4.0
+ipywidgets>=8.0
+nbformat>=5.9
