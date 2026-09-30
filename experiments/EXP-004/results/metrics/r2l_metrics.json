@@ -1,0 +1,737 @@
+{
+  "experiment_id": "EXP-004",
+  "timestamp": "2026-09-30T14:38:14Z",
+  "random_seed": 42,
+  "environment": {
+    "python": "3.14.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pandas": "3.0.0",
+    "numpy": "2.4.2",
+    "scikit_learn": "1.8.0",
+    "matplotlib": "3.10.8"
+  },
+  "train_file": {
+    "path": "data/raw/KDDTrain+.txt",
+    "rows": 125973,
+    "sha256": "1b86d2f957b33082081bba410fe129b475efebcc13c9014c3f447c8271aadf95"
+  },
+  "test_file": {
+    "path": "data/raw/KDDTest+.txt",
+    "rows": 22544,
+    "sha256": "fa46b0935342616aa83b7c2578db355b6a7aaabbc492248172c7a1e8b7ab8f84"
+  },
+  "r2l_composition": [
+    {
+      "r2l_label": "ftp_write",
+      "train_count": 8,
+      "train_share_r2l_pct": 0.8,
+      "test_count": 3,
+      "test_share_r2l_pct": 0.1,
+      "representation_status": "shared"
+    },
+    {
+      "r2l_label": "guess_passwd",
+      "train_count": 53,
+      "train_share_r2l_pct": 5.33,
+      "test_count": 1231,
+      "test_share_r2l_pct": 42.67,
+      "representation_status": "shared"
+    },
+    {
+      "r2l_label": "httptunnel",
+      "train_count": 0,
+      "train_share_r2l_pct": 0.0,
+      "test_count": 133,
+      "test_share_r2l_pct": 4.61,
+      "representation_status": "test_only"
+    },
+    {
+      "r2l_label": "imap",
+      "train_count": 11,
+      "train_share_r2l_pct": 1.11,
+      "test_count": 1,
+      "test_share_r2l_pct": 0.03,
+      "representation_status": "shared"
+    },
+    {
+      "r2l_label": "multihop",
+      "train_count": 7,
+      "train_share_r2l_pct": 0.7,
+      "test_count": 18,
+      "test_share_r2l_pct": 0.62,
+      "representation_status": "shared"
+    },
+    {
+      "r2l_label": "named",
+      "train_count": 0,
+      "train_share_r2l_pct": 0.0,
+      "test_count": 17,
+      "test_share_r2l_pct": 0.59,
+      "representation_status": "test_only"
+    },
+    {
+      "r2l_label": "phf",
+      "train_count": 4,
+      "train_share_r2l_pct": 0.4,
+      "test_count": 2,
+      "test_share_r2l_pct": 0.07,
+      "representation_status": "shared"
+    },
+    {
+      "r2l_label": "sendmail",
+      "train_count": 0,
+      "train_share_r2l_pct": 0.0,
+      "test_count": 14,
+      "test_share_r2l_pct": 0.49,
+      "representation_status": "test_only"
+    },
+    {
+      "r2l_label": "snmpgetattack",
+      "train_count": 0,
+      "train_share_r2l_pct": 0.0,
+      "test_count": 178,
+      "test_share_r2l_pct": 6.17,
+      "representation_status": "test_only"
+    },
+    {
+      "r2l_label": "snmpguess",
+      "train_count": 0,
+      "train_share_r2l_pct": 0.0,
+      "test_count": 331,
+      "test_share_r2l_pct": 11.47,
+      "representation_status": "test_only"
+    },
+    {
+      "r2l_label": "spy",
+      "train_count": 2,
+      "train_share_r2l_pct": 0.2,
+      "test_count": 0,
+      "test_share_r2l_pct": 0.0,
+      "representation_status": "train_only"
+    },
+    {
+      "r2l_label": "warezclient",
+      "train_count": 890,
+      "train_share_r2l_pct": 89.45,
+      "test_count": 0,
+      "test_share_r2l_pct": 0.0,
+      "representation_status": "train_only"
+    },
+    {
+      "r2l_label": "warezmaster",
+      "train_count": 20,
+      "train_share_r2l_pct": 2.01,
+      "test_count": 944,
+      "test_share_r2l_pct": 32.72,
+      "representation_status": "shared"
+    },
+    {
+      "r2l_label": "xlock",
+      "train_count": 0,
+      "train_share_r2l_pct": 0.0,
+      "test_count": 9,
+      "test_share_r2l_pct": 0.31,
+      "representation_status": "test_only"
+    },
+    {
+      "r2l_label": "xsnoop",
+      "train_count": 0,
+      "train_share_r2l_pct": 0.0,
+      "test_count": 4,
+      "test_share_r2l_pct": 0.14,
+      "representation_status": "test_only"
+    }
+  ],
+  "label_detection_results": [
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "ftp_write",
+      "train_count": 8,
+      "test_count": 3,
+      "train_share_r2l_pct": 0.8,
+      "test_share_r2l_pct": 0.1,
+      "representation_status": "shared",
+      "tp": 1.0,
+      "fn": 2.0,
+      "detection_rate_pct": 33.33
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "guess_passwd",
+      "train_count": 53,
+      "test_count": 1231,
+      "train_share_r2l_pct": 5.33,
+      "test_share_r2l_pct": 42.67,
+      "representation_status": "shared",
+      "tp": 6.0,
+      "fn": 1225.0,
+      "detection_rate_pct": 0.49
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "httptunnel",
+      "train_count": 0,
+      "test_count": 133,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 4.61,
+      "representation_status": "test_only",
+      "tp": 2.0,
+      "fn": 131.0,
+      "detection_rate_pct": 1.5
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "imap",
+      "train_count": 11,
+      "test_count": 1,
+      "train_share_r2l_pct": 1.11,
+      "test_share_r2l_pct": 0.03,
+      "representation_status": "shared",
+      "tp": 1.0,
+      "fn": 0.0,
+      "detection_rate_pct": 100.0
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "multihop",
+      "train_count": 7,
+      "test_count": 18,
+      "train_share_r2l_pct": 0.7,
+      "test_share_r2l_pct": 0.62,
+      "representation_status": "shared",
+      "tp": 2.0,
+      "fn": 16.0,
+      "detection_rate_pct": 11.11
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "named",
+      "train_count": 0,
+      "test_count": 17,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.59,
+      "representation_status": "test_only",
+      "tp": 1.0,
+      "fn": 16.0,
+      "detection_rate_pct": 5.88
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "phf",
+      "train_count": 4,
+      "test_count": 2,
+      "train_share_r2l_pct": 0.4,
+      "test_share_r2l_pct": 0.07,
+      "representation_status": "shared",
+      "tp": 0.0,
+      "fn": 2.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "sendmail",
+      "train_count": 0,
+      "test_count": 14,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.49,
+      "representation_status": "test_only",
+      "tp": 1.0,
+      "fn": 13.0,
+      "detection_rate_pct": 7.14
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "snmpgetattack",
+      "train_count": 0,
+      "test_count": 178,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 6.17,
+      "representation_status": "test_only",
+      "tp": 1.0,
+      "fn": 177.0,
+      "detection_rate_pct": 0.56
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "snmpguess",
+      "train_count": 0,
+      "test_count": 331,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 11.47,
+      "representation_status": "test_only",
+      "tp": 2.0,
+      "fn": 329.0,
+      "detection_rate_pct": 0.6
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "spy",
+      "train_count": 2,
+      "test_count": 0,
+      "train_share_r2l_pct": 0.2,
+      "test_share_r2l_pct": 0.0,
+      "representation_status": "train_only",
+      "tp": NaN,
+      "fn": NaN,
+      "detection_rate_pct": NaN
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "warezclient",
+      "train_count": 890,
+      "test_count": 0,
+      "train_share_r2l_pct": 89.45,
+      "test_share_r2l_pct": 0.0,
+      "representation_status": "train_only",
+      "tp": NaN,
+      "fn": NaN,
+      "detection_rate_pct": NaN
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "warezmaster",
+      "train_count": 20,
+      "test_count": 944,
+      "train_share_r2l_pct": 2.01,
+      "test_share_r2l_pct": 32.72,
+      "representation_status": "shared",
+      "tp": 15.0,
+      "fn": 929.0,
+      "detection_rate_pct": 1.59
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "xlock",
+      "train_count": 0,
+      "test_count": 9,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.31,
+      "representation_status": "test_only",
+      "tp": 2.0,
+      "fn": 7.0,
+      "detection_rate_pct": 22.22
+    },
+    {
+      "model": "Logistic Regression",
+      "r2l_label": "xsnoop",
+      "train_count": 0,
+      "test_count": 4,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.14,
+      "representation_status": "test_only",
+      "tp": 0.0,
+      "fn": 4.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "ftp_write",
+      "train_count": 8,
+      "test_count": 3,
+      "train_share_r2l_pct": 0.8,
+      "test_share_r2l_pct": 0.1,
+      "representation_status": "shared",
+      "tp": 3.0,
+      "fn": 0.0,
+      "detection_rate_pct": 100.0
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "guess_passwd",
+      "train_count": 53,
+      "test_count": 1231,
+      "train_share_r2l_pct": 5.33,
+      "test_share_r2l_pct": 42.67,
+      "representation_status": "shared",
+      "tp": 0.0,
+      "fn": 1231.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "httptunnel",
+      "train_count": 0,
+      "test_count": 133,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 4.61,
+      "representation_status": "test_only",
+      "tp": 109.0,
+      "fn": 24.0,
+      "detection_rate_pct": 81.95
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "imap",
+      "train_count": 11,
+      "test_count": 1,
+      "train_share_r2l_pct": 1.11,
+      "test_share_r2l_pct": 0.03,
+      "representation_status": "shared",
+      "tp": 1.0,
+      "fn": 0.0,
+      "detection_rate_pct": 100.0
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "multihop",
+      "train_count": 7,
+      "test_count": 18,
+      "train_share_r2l_pct": 0.7,
+      "test_share_r2l_pct": 0.62,
+      "representation_status": "shared",
+      "tp": 5.0,
+      "fn": 13.0,
+      "detection_rate_pct": 27.78
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "named",
+      "train_count": 0,
+      "test_count": 17,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.59,
+      "representation_status": "test_only",
+      "tp": 4.0,
+      "fn": 13.0,
+      "detection_rate_pct": 23.53
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "phf",
+      "train_count": 4,
+      "test_count": 2,
+      "train_share_r2l_pct": 0.4,
+      "test_share_r2l_pct": 0.07,
+      "representation_status": "shared",
+      "tp": 1.0,
+      "fn": 1.0,
+      "detection_rate_pct": 50.0
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "sendmail",
+      "train_count": 0,
+      "test_count": 14,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.49,
+      "representation_status": "test_only",
+      "tp": 1.0,
+      "fn": 13.0,
+      "detection_rate_pct": 7.14
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "snmpgetattack",
+      "train_count": 0,
+      "test_count": 178,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 6.17,
+      "representation_status": "test_only",
+      "tp": 0.0,
+      "fn": 178.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "snmpguess",
+      "train_count": 0,
+      "test_count": 331,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 11.47,
+      "representation_status": "test_only",
+      "tp": 328.0,
+      "fn": 3.0,
+      "detection_rate_pct": 99.09
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "spy",
+      "train_count": 2,
+      "test_count": 0,
+      "train_share_r2l_pct": 0.2,
+      "test_share_r2l_pct": 0.0,
+      "representation_status": "train_only",
+      "tp": NaN,
+      "fn": NaN,
+      "detection_rate_pct": NaN
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "warezclient",
+      "train_count": 890,
+      "test_count": 0,
+      "train_share_r2l_pct": 89.45,
+      "test_share_r2l_pct": 0.0,
+      "representation_status": "train_only",
+      "tp": NaN,
+      "fn": NaN,
+      "detection_rate_pct": NaN
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "warezmaster",
+      "train_count": 20,
+      "test_count": 944,
+      "train_share_r2l_pct": 2.01,
+      "test_share_r2l_pct": 32.72,
+      "representation_status": "shared",
+      "tp": 167.0,
+      "fn": 777.0,
+      "detection_rate_pct": 17.69
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "xlock",
+      "train_count": 0,
+      "test_count": 9,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.31,
+      "representation_status": "test_only",
+      "tp": 0.0,
+      "fn": 9.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Decision Tree",
+      "r2l_label": "xsnoop",
+      "train_count": 0,
+      "test_count": 4,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.14,
+      "representation_status": "test_only",
+      "tp": 1.0,
+      "fn": 3.0,
+      "detection_rate_pct": 25.0
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "ftp_write",
+      "train_count": 8,
+      "test_count": 3,
+      "train_share_r2l_pct": 0.8,
+      "test_share_r2l_pct": 0.1,
+      "representation_status": "shared",
+      "tp": 0.0,
+      "fn": 3.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "guess_passwd",
+      "train_count": 53,
+      "test_count": 1231,
+      "train_share_r2l_pct": 5.33,
+      "test_share_r2l_pct": 42.67,
+      "representation_status": "shared",
+      "tp": 0.0,
+      "fn": 1231.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "httptunnel",
+      "train_count": 0,
+      "test_count": 133,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 4.61,
+      "representation_status": "test_only",
+      "tp": 13.0,
+      "fn": 120.0,
+      "detection_rate_pct": 9.77
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "imap",
+      "train_count": 11,
+      "test_count": 1,
+      "train_share_r2l_pct": 1.11,
+      "test_share_r2l_pct": 0.03,
+      "representation_status": "shared",
+      "tp": 0.0,
+      "fn": 1.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "multihop",
+      "train_count": 7,
+      "test_count": 18,
+      "train_share_r2l_pct": 0.7,
+      "test_share_r2l_pct": 0.62,
+      "representation_status": "shared",
+      "tp": 1.0,
+      "fn": 17.0,
+      "detection_rate_pct": 5.56
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "named",
+      "train_count": 0,
+      "test_count": 17,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.59,
+      "representation_status": "test_only",
+      "tp": 2.0,
+      "fn": 15.0,
+      "detection_rate_pct": 11.76
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "phf",
+      "train_count": 4,
+      "test_count": 2,
+      "train_share_r2l_pct": 0.4,
+      "test_share_r2l_pct": 0.07,
+      "representation_status": "shared",
+      "tp": 1.0,
+      "fn": 1.0,
+      "detection_rate_pct": 50.0
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "sendmail",
+      "train_count": 0,
+      "test_count": 14,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.49,
+      "representation_status": "test_only",
+      "tp": 0.0,
+      "fn": 14.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "snmpgetattack",
+      "train_count": 0,
+      "test_count": 178,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 6.17,
+      "representation_status": "test_only",
+      "tp": 0.0,
+      "fn": 178.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "snmpguess",
+      "train_count": 0,
+      "test_count": 331,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 11.47,
+      "representation_status": "test_only",
+      "tp": 0.0,
+      "fn": 331.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "spy",
+      "train_count": 2,
+      "test_count": 0,
+      "train_share_r2l_pct": 0.2,
+      "test_share_r2l_pct": 0.0,
+      "representation_status": "train_only",
+      "tp": NaN,
+      "fn": NaN,
+      "detection_rate_pct": NaN
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "warezclient",
+      "train_count": 890,
+      "test_count": 0,
+      "train_share_r2l_pct": 89.45,
+      "test_share_r2l_pct": 0.0,
+      "representation_status": "train_only",
+      "tp": NaN,
+      "fn": NaN,
+      "detection_rate_pct": NaN
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "warezmaster",
+      "train_count": 20,
+      "test_count": 944,
+      "train_share_r2l_pct": 2.01,
+      "test_share_r2l_pct": 32.72,
+      "representation_status": "shared",
+      "tp": 142.0,
+      "fn": 802.0,
+      "detection_rate_pct": 15.04
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "xlock",
+      "train_count": 0,
+      "test_count": 9,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.31,
+      "representation_status": "test_only",
+      "tp": 0.0,
+      "fn": 9.0,
+      "detection_rate_pct": 0.0
+    },
+    {
+      "model": "Random Forest",
+      "r2l_label": "xsnoop",
+      "train_count": 0,
+      "test_count": 4,
+      "train_share_r2l_pct": 0.0,
+      "test_share_r2l_pct": 0.14,
+      "representation_status": "test_only",
+      "tp": 1.0,
+      "fn": 3.0,
+      "detection_rate_pct": 25.0
+    }
+  ],
+  "representation_groups": [
+    {
+      "model": "Logistic Regression",
+      "representation_status": "shared",
+      "test_sample_count": 2199,
+      "tp": 25,
+      "fn": 2174,
+      "detection_rate_pct": 1.14
+    },
+    {
+      "model": "Logistic Regression",
+      "representation_status": "test_only",
+      "test_sample_count": 686,
+      "tp": 9,
+      "fn": 677,
+      "detection_rate_pct": 1.31
+    },
+    {
+      "model": "Decision Tree",
+      "representation_status": "shared",
+      "test_sample_count": 2199,
+      "tp": 177,
+      "fn": 2022,
+      "detection_rate_pct": 8.05
+    },
+    {
+      "model": "Decision Tree",
+      "representation_status": "test_only",
+      "test_sample_count": 686,
+      "tp": 443,
+      "fn": 243,
+      "detection_rate_pct": 64.58
+    },
+    {
+      "model": "Random Forest",
+      "representation_status": "shared",
+      "test_sample_count": 2199,
+      "tp": 144,
+      "fn": 2055,
+      "detection_rate_pct": 6.55
+    },
+    {
+      "model": "Random Forest",
+      "representation_status": "test_only",
+      "test_sample_count": 686,
+      "tp": 16,
+      "fn": 670,
+      "detection_rate_pct": 2.33
+    }
+  ]
+}

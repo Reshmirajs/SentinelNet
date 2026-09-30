@@ -1,0 +1,37 @@
+[
+  {
+    "risk_id": "LEAK-001",
+    "severity": "HIGH",
+    "description": "The 'difficulty' column encodes the number of classifiers (out of 21) that correctly classified each record in the original KDD Cup 99 challenge. It is computed *using the label* and thus directly encodes class difficulty. Including it as a training feature would constitute label leakage.",
+    "evidence": "difficulty column present in both train and test; values are derived from classifier agreement on the true label.",
+    "mitigation": "Treat difficulty as metadata only. Never include it in feature matrices used for model training or evaluation."
+  },
+  {
+    "risk_id": "LEAK-002",
+    "severity": "MEDIUM",
+    "description": "The test set contains attack labels not present in the training set. Models trained on train cannot have learned these classes, which may cause inflated false-negative rates and must be reported.",
+    "evidence": "Test-only labels: ['apache2', 'httptunnel', 'mailbomb', 'mscan', 'named', 'processtable', 'ps', 'saint', 'sendmail', 'snmpgetattack', 'snmpguess', 'sqlattack', 'udpstorm', 'worm', 'xlock', 'xsnoop', 'xterm']",
+    "mitigation": "Report per-label test performance separately. Consider a 'known vs unknown attack' evaluation protocol."
+  },
+  {
+    "risk_id": "LEAK-003",
+    "severity": "LOW",
+    "description": "Some feature-label rows appear in both the training and test sets. This can inflate test-set metrics if not handled carefully.",
+    "evidence": "610 test samples (2.71% of test set) sharing 610 unique feature-label patterns are exact duplicates of training records.",
+    "mitigation": "Report results both including and excluding overlapping test rows. # RESEARCH DECISION NEEDED: decide whether to remove overlap rows."
+  },
+  {
+    "risk_id": "LEAK-004",
+    "severity": "LOW",
+    "description": "One or more features are constant (single unique value) across all samples. Constant features carry zero information and can cause issues with some normalisation schemes.",
+    "evidence": "Constant features: ['num_outbound_cmds']",
+    "mitigation": "Remove constant features during preprocessing. Document which features were removed and why."
+  },
+  {
+    "risk_id": "LEAK-005",
+    "severity": "MEDIUM",
+    "description": "Substantial class distribution shift between training and test sets (>5 percentage points). Accuracy evaluated on the test set may not reflect deployment performance, and may mask per-class degradation.",
+    "evidence": "Normal: train=53.5% \u2192 test=43.1% (\u0394=-10.4pp) | R2L: train=0.8% \u2192 test=12.8% (\u0394=+12.0pp)",
+    "mitigation": "Report per-category precision, recall, and F1 in addition to overall accuracy. Use macro-averaged metrics for fair comparison."
+  }
+]

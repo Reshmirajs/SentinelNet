@@ -1,0 +1,113 @@
+# =============================================================================
+# SentinelNet — Experiment Configuration
+# Experiment ID : EXP-002
+# Title         : Supervised Baseline Binary Intrusion Detection and Generalization Audit
+# =============================================================================
+
+experiment_id: EXP-002
+title: "Supervised Baseline Binary Intrusion Detection and Generalization Audit"
+status: COMPLETE  # Run completed 2026-09-30T13:30:57Z
+
+research_question: >
+  What baseline binary classification performance (Normal vs. Attack) do Logistic
+  Regression, Decision Tree, and Random Forest achieve under strict leakage-free
+  evaluation on NSL-KDD? How severely does detection rate degrade on novel
+  (test-only) attack types relative to known attack types? Do exact train/test
+  duplicate samples inflate reported test performance?
+
+hypotheses:
+  H1: >
+    Detection rates (Recall) on the 17 novel test-only attack classes will be
+    substantially lower than on the 21 known attack classes across all three models.
+  H2: >
+    Random Forest will achieve the highest F1-score and best balance between
+    False Alarm Rate and Detection Rate on the full test set.
+  H3: >
+    All three models will exhibit higher accuracy on the 610 exact duplicate
+    test samples than on the 21,934 unique non-overlapping test samples.
+
+phase: supervised_baseline
+type: binary_classification
+
+# ---- Data ----------------------------------------------------------------
+dataset:
+  name: NSL-KDD
+  source: "https://www.unb.ca/cic/datasets/nsl.html"
+  citation: >
+    Tavallaee, M., Bagheri, E., Lu, W., & Ghorbani, A. A. (2009).
+    A detailed analysis of the KDD CUP 99 data set.
+    In 2009 IEEE Symposium on Computational Intelligence for Security
+    and Defense Applications (pp. 1-6). IEEE.
+  taxonomy_citation: >
+    MIT Lincoln Laboratory (1999). 1999 DARPA Off-Line Intrusion Detection
+    Evaluation / KDD Cup 1999 Task Specification.
+  files:
+    train: data/raw/KDDTrain+.txt
+    test:  data/raw/KDDTest+.txt
+  format: CSV (no header)
+  num_features: 41
+
+# ---- Binary Target --------------------------------------------------------
+target:
+  definition: "normal = 0 (Normal), all other labels = 1 (Attack)"
+  positive_class: 1  # Attack
+  negative_class: 0  # Normal
+
+# ---- Preprocessing --------------------------------------------------------
+preprocessing:
+  drop_metadata: ["difficulty"]           # LEAK-001 mitigation: never a feature
+  drop_constant: ["num_outbound_cmds"]    # LEAK-004 mitigation: zero-variance
+  categorical_features: ["protocol_type", "service", "flag"]
+  categorical_encoder: "OneHotEncoder(handle_unknown='ignore')"
+  binary_features: ["land", "logged_in", "root_shell", "su_attempted", "is_host_login", "is_guest_login"]
+  numerical_scaler: "StandardScaler"
+  fit_on: "training partition only"       # Strict leakage control
+
+# ---- Execution -----------------------------------------------------------
+random_seed: 42
+validation_split: 0.20   # 80/20 stratified split within KDDTrain+ for sanity check
+
+# ---- Models --------------------------------------------------------------
+models:
+  logistic_regression:
+    class: sklearn.linear_model.LogisticRegression
+    params: {solver: lbfgs, C: 1.0, max_iter: 1000, random_state: 42}
+  decision_tree:
+    class: sklearn.tree.DecisionTreeClassifier
+    params: {criterion: gini, max_depth: 20, random_state: 42}
+  random_forest:
+    class: sklearn.ensemble.RandomForestClassifier
+    params: {n_estimators: 100, random_state: 42, n_jobs: -1}
+
+# ---- Evaluation Cohorts --------------------------------------------------
+evaluation_cohorts:
+  primary: "Full KDDTest+ (official benchmark — contains overlap and novel samples)"
+  non_overlapping: "Test rows with NO exact feature+label match in KDDTrain+"
+  overlapping: "Test rows with exact feature+label match in KDDTrain+"
+  known_attacks: "Test attack samples whose label appears in KDDTrain+ label set"
+  novel_attacks: "Test attack samples whose label does NOT appear in KDDTrain+ label set"
+
+# ---- Outputs -------------------------------------------------------------
+outputs:
+  results_dir: experiments/EXP-002/results/
+  figures_dir: experiments/EXP-002/results/figures/
+  metrics_dir: experiments/EXP-002/results/metrics/
+  tables_dir:  experiments/EXP-002/results/tables/
+  report:      experiments/EXP-002/results/experiment_report.md
+
+# ---- Constraints (Research Constitution) ---------------------------------
+constraints:
+  train_model: true          # Training is the purpose of this experiment
+  download_data: false
+  modify_raw_data: false
+  fabricate_results: false
+  use_difficulty_as_feature: false
+  use_test_set_for_model_selection: false
+  resample_data: false       # No SMOTE or oversampling
+
+notes: >
+  EXP-002 establishes a clean, reproducible supervised baseline for binary IDS
+  on NSL-KDD for a college conference poster. All preprocessing is fitted strictly
+  on the training partition. KDDTest+ is quarantined until final evaluation.
+  Primary results are reported on the full KDDTest+ (official benchmark) alongside
+  disaggregated overlap/non-overlap and known/novel attack cohort breakdowns.

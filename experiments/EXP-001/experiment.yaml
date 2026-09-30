@@ -1,0 +1,73 @@
+# =============================================================================
+# SentinelNet — Experiment Configuration
+# Experiment ID : EXP-001
+# Title         : NSL-KDD Dataset Acquisition and Leakage Audit
+# =============================================================================
+
+experiment_id: EXP-001
+title: "NSL-KDD Dataset Acquisition and Leakage Audit"
+status: PENDING  # Updated to COMPLETE upon successful run
+
+research_question: >
+  What are the statistical properties of the NSL-KDD training and test sets,
+  and are there any data-leakage risks (e.g., train/test overlap, difficulty-score
+  contamination, or feature-level leakage) that would invalidate downstream
+  model evaluations?
+
+hypothesis: >
+  The NSL-KDD dataset contains measurable class imbalance and a non-trivial
+  overlap between training and test attack categories. The difficulty field
+  encodes per-sample classifier agreement scores that, if included as a
+  feature, would constitute label leakage.
+
+phase: data_audit
+type: descriptive_analysis
+
+# ---- Data ----------------------------------------------------------------
+dataset:
+  name: NSL-KDD
+  source: "https://www.unb.ca/cic/datasets/nsl.html"
+  citation: >
+    Tavallaee, M., Bagheri, E., Lu, W., & Ghorbani, A. A. (2009).
+    A detailed analysis of the KDD CUP 99 data set.
+    In 2009 IEEE Symposium on Computational Intelligence for Security
+    and Defense Applications (pp. 1–6). IEEE.
+  taxonomy_citation: >
+    MIT Lincoln Laboratory (1999). 1999 DARPA Off-Line Intrusion Detection
+    Evaluation / KDD Cup 1999 Task Specification.
+  files:
+    train: data/raw/KDDTrain+.txt
+    test:  data/raw/KDDTest+.txt
+  format: CSV (no header)
+  num_features: 41
+  label_column: 41      # 0-indexed; column name: label
+  difficulty_column: 42 # 0-indexed; column name: difficulty
+
+# ---- Execution -----------------------------------------------------------
+random_seed: 42   # Used only for any sampling operations; no model training
+
+# ---- Outputs -------------------------------------------------------------
+outputs:
+  results_dir: experiments/EXP-001/results/
+  figures_dir: experiments/EXP-001/results/figures/
+  metrics_dir: experiments/EXP-001/results/metrics/
+  tables_dir:  experiments/EXP-001/results/tables/
+  report:      experiments/EXP-001/results/audit_report.md
+
+# ---- Constraints (Research Constitution) ---------------------------------
+constraints:
+  train_model: false
+  download_data: false
+  modify_raw_data: false
+  fabricate_results: false
+  normalize_data: false
+  encode_data: false
+  scale_data: false
+  resample_data: false
+  use_difficulty_as_feature: false  # Treated as metadata only
+
+# ---- Notes ---------------------------------------------------------------
+notes: >
+  This experiment is a pure data audit. No feature engineering, preprocessing,
+  or model training is performed. The difficulty column is treated exclusively
+  as metadata. All statistics are computed from the actual raw dataset files.

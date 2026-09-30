@@ -1,0 +1,6 @@
+category,train_count,train_pct_of_total,train_pct_of_attacks,test_count,test_pct_of_total,test_pct_of_attacks,delta_total_pct_pp
+Normal,67343,53.4583,,9711,43.0758,,-10.3825
+DoS,45927,36.4578,78.3336,7460,33.0908,58.1314,-3.367
+Probe,11656,9.2528,19.8806,2421,10.739,18.8654,1.4862
+R2L,995,0.7899,1.6971,2885,12.7972,22.4811,12.0073
+U2R,52,0.0413,0.0887,67,0.2972,0.5221,0.2559

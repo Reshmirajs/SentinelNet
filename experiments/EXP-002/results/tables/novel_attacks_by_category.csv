@@ -1,0 +1,13 @@
+model,category_cohort,n_samples,detection_rate_pct,attack_labels
+Logistic Regression,novel_dos_attacks,1719,42.58,apache2; mailbomb; processtable; udpstorm; worm
+Logistic Regression,novel_probe_attacks,1315,59.85,mscan; saint
+Logistic Regression,novel_r2l_attacks,686,1.31,httptunnel; named; sendmail; snmpgetattack; snmpguess; xlock; xsnoop
+Logistic Regression,novel_u2r_attacks,30,10.0,ps; sqlattack; xterm
+Decision Tree,novel_dos_attacks,1719,42.58,apache2; mailbomb; processtable; udpstorm; worm
+Decision Tree,novel_probe_attacks,1315,68.52,mscan; saint
+Decision Tree,novel_r2l_attacks,686,64.58,httptunnel; named; sendmail; snmpgetattack; snmpguess; xlock; xsnoop
+Decision Tree,novel_u2r_attacks,30,33.33,ps; sqlattack; xterm
+Random Forest,novel_dos_attacks,1719,15.07,apache2; mailbomb; processtable; udpstorm; worm
+Random Forest,novel_probe_attacks,1315,53.69,mscan; saint
+Random Forest,novel_r2l_attacks,686,2.33,httptunnel; named; sendmail; snmpgetattack; snmpguess; xlock; xsnoop
+Random Forest,novel_u2r_attacks,30,16.67,ps; sqlattack; xterm

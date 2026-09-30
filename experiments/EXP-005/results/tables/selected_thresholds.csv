@@ -1,0 +1,4 @@
+model,selection_rule,selected_threshold,validation_detection_rate,validation_far,validation_precision,validation_f1
+Logistic Regression,primary: highest threshold >= 90% validation detection rate,0.94,0.905083,0.001262,0.998401,0.949454
+Decision Tree,primary: highest threshold >= 90% validation detection rate,1.0,0.998806,0.001633,0.998125,0.998465
+Random Forest,primary: highest threshold >= 90% validation detection rate,1.0,0.958383,0.0,1.0,0.978749

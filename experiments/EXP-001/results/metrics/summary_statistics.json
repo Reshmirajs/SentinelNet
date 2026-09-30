@@ -1,0 +1,31 @@
+{
+  "experiment_id": "EXP-001",
+  "timestamp": "2026-09-30T12:31:32Z",
+  "seed": 42,
+  "environment": {
+    "python": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+    "python_version_short": "3.14.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pandas": "3.0.0",
+    "numpy": "2.4.2",
+    "matplotlib": "3.10.8",
+    "scipy": "1.17.0"
+  },
+  "checksums": {
+    "train": "1b86d2f957b33082081bba410fe129b475efebcc13c9014c3f447c8271aadf95",
+    "test": "fa46b0935342616aa83b7c2578db355b6a7aaabbc492248172c7a1e8b7ab8f84"
+  },
+  "train_file": "data/raw/KDDTrain+.txt",
+  "test_file": "data/raw/KDDTest+.txt",
+  "train_shape": [
+    125973,
+    43
+  ],
+  "test_shape": [
+    22544,
+    43
+  ],
+  "num_features": 41,
+  "label_column": "label",
+  "difficulty_column": "difficulty (metadata only)"
+}

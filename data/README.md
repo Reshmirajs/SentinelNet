@@ -1,103 +1,74 @@
 # SentinelNet — Dataset Documentation
 
-> **IMPORTANT:** Raw data files are **never committed** to this repository.  
-> This file documents dataset provenance, acquisition instructions, and data organization.
+> **IMPORTANT:** Raw dataset files are **never committed** to this repository.  
+> This directory organizes data used in SentinelNet research experiments.
 
 ---
 
-## Overview
+## 1. Overview
 
-This directory organizes all data used in SentinelNet research experiments. It is divided into three tiers:
+The primary benchmark evaluated in SentinelNet is **NSL-KDD**, an established benchmark derived from the KDD Cup 1999 dataset. Due to file size and licensing constraints, raw dataset files are **not included** in this repository.
 
-| Directory | Contents | Committed? |
-|-----------|----------|------------|
-| `raw/` | Original, unmodified datasets | **NO** — gitignored |
-| `interim/` | Partially processed data | **NO** — gitignored |
-| `processed/` | Final ML-ready feature matrices | **NO** — gitignored |
-
-All directories are gitignored to prevent accidental data commits. Only this `README.md` is tracked.
+Researchers wishing to inspect or reproduce the experiments must obtain the dataset files independently and place them in the local directory structure as described below.
 
 ---
 
-## Datasets
+## 2. Dataset Provenance
 
-> **STATUS: No datasets have been acquired yet.**
-
-Datasets will be documented here as they are approved and downloaded by the research lead.
-
-For each dataset, record:
-
-```
-### Dataset Name
-
-- **Source:** [URL or citation]
-- **Version/Date:** 
-- **License:**
-- **Size:** 
-- **Description:** 
-- **Features:** 
-- **Classes/Labels:** 
-- **Acquisition:** [Steps to obtain the data]
-- **Placement:** data/raw/<subdirectory>/
-- **SHA256 checksum:** [Verify integrity after download]
-- **Citation:**
-```
+| Field | Description |
+|---|---|
+| **Dataset Name** | NSL-KDD |
+| **Originating Institution** | Canadian Institute for Cybersecurity, University of New Brunswick (UNB) |
+| **Documented URL** | https://www.unb.ca/cic/datasets/nsl.html |
+| **Citation** | Tavallaee, M., Bagheri, E., Lu, W., & Ghorbani, A. A. (2009). *A detailed analysis of the KDD CUP 99 data set*. IEEE Symposium on Computational Intelligence for Security and Defense Applications (CISDA). |
 
 ---
 
-## Candidate Datasets (Under Consideration)
+## 3. Required Local Files
 
-> **RESEARCH DECISION NEEDED:** The research lead must approve which datasets to use before acquisition.
+The experimental pipeline in SentinelNet (EXP-001 through EXP-005) requires the following two raw dataset files:
 
-The following datasets are commonly used in network intrusion detection research and may be considered:
-
-- **KDD Cup 1999** — Classic benchmark; known class imbalance issues
-- **NSL-KDD** — Improved version of KDD Cup 1999
-- **UNSW-NB15** — Modern synthetic dataset with 9 attack categories
-- **CIC-IDS-2017** — Canadian Institute for Cybersecurity; realistic traffic
-- **CIC-IDS-2018** — Extended version of CIC-IDS-2017
-- **CAIDA** — Real-world anonymized internet traffic
-
-No dataset has been selected. No data has been downloaded.
+| File Name | Expected Location | Description | Expected Rows | SHA-256 Checksum |
+|---|---|---|---:|---|
+| `KDDTrain+.txt` | `data/raw/KDDTrain+.txt` | Primary training dataset | 125,973 | `1b86d2f957b33082081bba410fe129b475efebcc13c9014c3f447c8271aadf95` |
+| `KDDTest+.txt` | `data/raw/KDDTest+.txt` | Official test benchmark | 22,544 | `fa46b0935342616aa83b7c2578db355b6a7aaabbc492248172c7a1e8b7ab8f84` |
 
 ---
 
-## Data Organization Convention
+## 4. Directory Organization and Immutability
 
-Once a dataset is approved and downloaded, organize as follows:
+The `data/` directory is organized into three tiers:
 
 ```
 data/
-├── raw/
-│   └── <dataset-name>/          # Unmodified source files
-│       ├── <original-files>
-│       └── CHECKSUMS.sha256
-│
-├── interim/
-│   └── <dataset-name>/          # After cleaning, before feature engineering
-│       ├── train.parquet
-│       ├── val.parquet
-│       └── test.parquet
-│
-└── processed/
-    └── <dataset-name>/          # Final ML-ready feature matrices
-        ├── X_train.parquet
-        ├── X_val.parquet
-        ├── X_test.parquet
-        ├── y_train.parquet
-        ├── y_val.parquet
-        └── y_test.parquet
+├── README.md               # This documentation file (tracked in Git)
+├── raw/                    # Raw source files (READ-ONLY, never committed)
+│   ├── KDDTrain+.txt       # (User-supplied, gitignored)
+│   └── KDDTest+.txt        # (User-supplied, gitignored)
+├── interim/                # Partially processed or intermediate data (gitignored)
+└── processed/              # ML-ready features (gitignored)
 ```
 
----
-
-## Reproducibility Note
-
-- Always verify file integrity with checksums after download.
-- Document the exact download date and source URL.
-- Any preprocessing applied to raw data must be scripted in `src/preprocessing/` — never manual.
-- The split strategy (train/val/test ratios, stratification) must be recorded in the relevant experiment config.
+### Immutability Rule
+- **`data/raw/` is strictly READ-ONLY.**
+- Raw data files must **never be modified, overwritten, or edited**.
+- All cleaning, transformation, and feature extraction steps must be performed programmatically via reproducible scripts without altering raw input files.
+- `.gitignore` is configured to exclude all files in `data/raw/`, `data/interim/`, and `data/processed/` except directory `.gitkeep` markers and this documentation file.
 
 ---
 
-*Last updated: 2026-09-30 | SentinelNet Research Team*
+## 5. Verification
+
+Before running experiments, verify the integrity of the downloaded files using SHA-256:
+
+### Linux / macOS
+```bash
+sha256sum data/raw/KDDTrain+.txt data/raw/KDDTest+.txt
+```
+
+### Windows (PowerShell)
+```powershell
+Get-FileHash data/raw/KDDTrain+.txt, data/raw/KDDTest+.txt -Algorithm SHA256
+```
+
+The resulting hashes should match the checksums listed in Section 3 above. Once verified, the experiment pipeline and test suite can be run directly.

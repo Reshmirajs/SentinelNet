@@ -1,0 +1,44 @@
+{
+  "train": {
+    "split": "train",
+    "total_rows": 125973,
+    "total_feature_columns": 41,
+    "total_missing_values": 0,
+    "missing_by_column": {},
+    "duplicate_rows_total": 0,
+    "unique_duplicate_groups": 0,
+    "constant_features": [
+      "num_outbound_cmds"
+    ],
+    "near_constant_numerical_features": [
+      "land",
+      "logged_in",
+      "root_shell",
+      "num_outbound_cmds",
+      "is_host_login",
+      "is_guest_login"
+    ],
+    "negative_value_anomalies": {}
+  },
+  "test": {
+    "split": "test",
+    "total_rows": 22544,
+    "total_feature_columns": 41,
+    "total_missing_values": 0,
+    "missing_by_column": {},
+    "duplicate_rows_total": 0,
+    "unique_duplicate_groups": 0,
+    "constant_features": [
+      "num_outbound_cmds"
+    ],
+    "near_constant_numerical_features": [
+      "land",
+      "logged_in",
+      "root_shell",
+      "num_outbound_cmds",
+      "is_host_login",
+      "is_guest_login"
+    ],
+    "negative_value_anomalies": {}
+  }
+}

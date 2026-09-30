@@ -1,0 +1,102 @@
+# =============================================================================
+# SentinelNet — Experiment Configuration
+# Experiment ID : EXP-004
+# Title         : R2L Within-Category Label-Shift Analysis
+# =============================================================================
+
+experiment_id: EXP-004
+title: "R2L Within-Category Label-Shift Analysis"
+status: COMPLETE  # Verified execution: 2026-09-30T14:38:14Z — all outputs generated, 135/135 tests pass
+
+research_question: >
+  How does binary intrusion-detection performance vary across R2L attack
+  labels according to their representation in the training data?
+
+hypothesis: >
+  H4: R2L attack labels with greater representation in the training data will
+  generally show higher detection rates than R2L labels with limited or no
+  training representation.
+
+phase: within_category_shift
+type: post_hoc_subgroup_analysis
+target_category: R2L
+
+# ---- Data ----------------------------------------------------------------
+dataset:
+  name: NSL-KDD
+  source: "https://www.unb.ca/cic/datasets/nsl.html"
+  files:
+    train: data/raw/KDDTrain+.txt
+    test:  data/raw/KDDTest+.txt
+  format: CSV (no header)
+  num_features: 41
+
+# ---- Binary Target --------------------------------------------------------
+target:
+  definition: "normal = 0 (Normal), all other labels = 1 (Attack)"
+  positive_class: 1
+  negative_class: 0
+  note: "Model remains binary. Evaluates detection of R2L test records."
+
+# ---- Representation Groups ------------------------------------------------
+representation_groups:
+  shared:
+    description: "R2L labels present in both KDDTrain+ and KDDTest+"
+  test_only:
+    description: "R2L labels present in KDDTest+ but absent from KDDTrain+"
+  train_only:
+    description: "R2L labels present in KDDTrain+ but absent from KDDTest+ (no test samples)"
+
+# ---- Preprocessing & Models (Identical to EXP-002/EXP-003) ----------------
+preprocessing:
+  drop_metadata: ["difficulty"]
+  drop_constant: ["num_outbound_cmds"]
+  categorical_features: ["protocol_type", "service", "flag"]
+  categorical_encoder: "OneHotEncoder(handle_unknown='ignore')"
+  binary_features: ["land", "logged_in", "root_shell", "su_attempted", "is_host_login", "is_guest_login"]
+  numerical_scaler: "StandardScaler"
+  fit_on: "training partition only"
+
+random_seed: 42
+validation_split: 0.20   # 80/20 stratified split within KDDTrain+
+
+models:
+  logistic_regression:
+    class: sklearn.linear_model.LogisticRegression
+    params: {solver: lbfgs, C: 1.0, max_iter: 1000, random_state: 42}
+  decision_tree:
+    class: sklearn.tree.DecisionTreeClassifier
+    params: {criterion: gini, max_depth: 20, random_state: 42}
+  random_forest:
+    class: sklearn.ensemble.RandomForestClassifier
+    params: {n_estimators: 100, random_state: 42, n_jobs: -1}
+
+# ---- Outputs -------------------------------------------------------------
+outputs:
+  results_dir: experiments/EXP-004/results/
+  r2l_label_detection_results: experiments/EXP-004/results/r2l_label_detection_results.csv
+  r2l_representation_groups: experiments/EXP-004/results/r2l_representation_groups.csv
+  report: experiments/EXP-004/results/experiment_report.md
+  figures:
+    label_dr: experiments/EXP-004/results/figures/r2l_label_detection_rate.png
+    composition: experiments/EXP-004/results/figures/r2l_train_vs_test_composition.png
+
+# ---- Constraints ---------------------------------------------------------
+constraints:
+  train_model: true
+  download_data: false
+  modify_raw_data: false
+  fabricate_results: false
+  use_difficulty_as_feature: false
+  use_test_set_for_model_selection: false
+  resample_data: false
+  class_weight: null
+  threshold_tuning: false
+  multiclass_target: false
+  claim_causality: false
+  call_novel_attacks_zero_day: false
+  rank_models_as_best: false
+
+notes: >
+  Follow-up analysis to EXP-003 disaggregating the poor category-level R2L detection
+  by individual attack labels across training representation groups (shared, test-only, train-only).

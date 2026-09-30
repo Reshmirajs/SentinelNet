@@ -1,0 +1,141 @@
+{
+  "experiment_id": "EXP-005",
+  "timestamp": "2026-09-30T15:17:19Z",
+  "random_seed": 42,
+  "environment": {
+    "python": "3.14.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pandas": "3.0.0",
+    "numpy": "2.4.2",
+    "scikit_learn": "1.8.0",
+    "matplotlib": "3.10.8"
+  },
+  "train_file": {
+    "path": "data/raw/KDDTrain+.txt",
+    "rows": 125973,
+    "sha256": "1b86d2f957b33082081bba410fe129b475efebcc13c9014c3f447c8271aadf95"
+  },
+  "test_file": {
+    "path": "data/raw/KDDTest+.txt",
+    "rows": 22544,
+    "sha256": "fa46b0935342616aa83b7c2578db355b6a7aaabbc492248172c7a1e8b7ab8f84"
+  },
+  "threshold_grid": {
+    "start": 0.0,
+    "stop": 1.0,
+    "step": 0.01,
+    "n_thresholds": 101
+  },
+  "selection_rule": {
+    "primary": "highest threshold >= 90% validation DR",
+    "fallback": "highest validation DR, lowest FAR on tie, highest threshold on tie",
+    "data_used": "20% KDDTrain+ validation partition only"
+  },
+  "selected_thresholds": {
+    "Logistic Regression": 0.94,
+    "Decision Tree": 1.0,
+    "Random Forest": 1.0
+  },
+  "validation_results_at_selected": {
+    "Logistic Regression": {
+      "selected_threshold": 0.94,
+      "selection_rule": "primary: highest threshold >= 90% validation detection rate",
+      "validation_detection_rate": 0.905083,
+      "validation_far": 0.001262,
+      "validation_precision": 0.998401,
+      "validation_f1": 0.949454
+    },
+    "Decision Tree": {
+      "selected_threshold": 1.0,
+      "selection_rule": "primary: highest threshold >= 90% validation detection rate",
+      "validation_detection_rate": 0.998806,
+      "validation_far": 0.001633,
+      "validation_precision": 0.998125,
+      "validation_f1": 0.998465
+    },
+    "Random Forest": {
+      "selected_threshold": 1.0,
+      "selection_rule": "primary: highest threshold >= 90% validation detection rate",
+      "validation_detection_rate": 0.958383,
+      "validation_far": 0.0,
+      "validation_precision": 1.0,
+      "validation_f1": 0.978749
+    }
+  },
+  "test_results_at_selected": {
+    "Logistic Regression": {
+      "threshold": 0.94,
+      "tp": 7095,
+      "tn": 9100,
+      "fp": 611,
+      "fn": 5738,
+      "detection_rate": 0.552872,
+      "far": 0.062918,
+      "precision": 0.920711,
+      "f1": 0.690881,
+      "accuracy": 0.718373,
+      "roc_auc": 0.79732,
+      "model": "Logistic Regression",
+      "selected_threshold": 0.94
+    },
+    "Decision Tree": {
+      "threshold": 1.0,
+      "tp": 8887,
+      "tn": 8861,
+      "fp": 850,
+      "fn": 3946,
+      "detection_rate": 0.692511,
+      "far": 0.08753,
+      "precision": 0.912704,
+      "f1": 0.787506,
+      "accuracy": 0.78726,
+      "roc_auc": 0.802826,
+      "model": "Decision Tree",
+      "selected_threshold": 1.0
+    },
+    "Random Forest": {
+      "threshold": 1.0,
+      "tp": 5700,
+      "tn": 9634,
+      "fp": 77,
+      "fn": 7133,
+      "detection_rate": 0.444167,
+      "far": 0.007929,
+      "precision": 0.986671,
+      "f1": 0.612574,
+      "accuracy": 0.680181,
+      "roc_auc": 0.953461,
+      "model": "Random Forest",
+      "selected_threshold": 1.0
+    }
+  },
+  "exp002_baseline_reference": {
+    "Logistic Regression": {
+      "threshold": 0.5,
+      "accuracy": 0.753637,
+      "precision": 0.917039,
+      "detection_rate": 0.623627,
+      "far": 0.074555,
+      "f1": 0.742393,
+      "roc_auc": 0.79732
+    },
+    "Decision Tree": {
+      "threshold": 0.5,
+      "accuracy": 0.787305,
+      "precision": 0.912713,
+      "detection_rate": 0.692589,
+      "far": 0.08753,
+      "f1": 0.787559,
+      "roc_auc": 0.802826
+    },
+    "Random Forest": {
+      "threshold": 0.5,
+      "accuracy": 0.772179,
+      "precision": 0.967903,
+      "detection_rate": 0.620354,
+      "far": 0.027186,
+      "f1": 0.756102,
+      "roc_auc": 0.953461
+    }
+  }
+}

@@ -1,0 +1,107 @@
+# =============================================================================
+# SentinelNet — Experiment Configuration
+# Experiment ID : EXP-003
+# Title         : Minority Attack Category Sensitivity
+# =============================================================================
+
+experiment_id: EXP-003
+title: "Minority Attack Category Sensitivity"
+status: COMPLETE  # Run completed 2026-09-30T14:09:51Z
+
+research_question: >
+  How does binary intrusion-detection performance vary across DoS, Probe,
+  R2L, and U2R attack categories?
+
+hypothesis: >
+  Detection performance will be lower for the less represented attack categories,
+  particularly R2L and U2R, than for the more represented DoS and Probe categories.
+
+phase: category_sensitivity
+type: post_hoc_subgroup_analysis
+
+# ---- Data ----------------------------------------------------------------
+dataset:
+  name: NSL-KDD
+  source: "https://www.unb.ca/cic/datasets/nsl.html"
+  citation: >
+    Tavallaee, M., Bagheri, E., Lu, W., & Ghorbani, A. A. (2009).
+    A detailed analysis of the KDD CUP 99 data set.
+    In 2009 IEEE Symposium on Computational Intelligence for Security
+    and Defense Applications (pp. 1-6). IEEE.
+  taxonomy_citation: >
+    MIT Lincoln Laboratory (1999). 1999 DARPA Off-Line Intrusion Detection
+    Evaluation / KDD Cup 1999 Task Specification.
+  files:
+    train: data/raw/KDDTrain+.txt
+    test:  data/raw/KDDTest+.txt
+  format: CSV (no header)
+  num_features: 41
+
+# ---- Binary Target --------------------------------------------------------
+target:
+  definition: "normal = 0 (Normal), all other labels = 1 (Attack)"
+  positive_class: 1  # Attack
+  negative_class: 0  # Normal
+  note: >
+    The model remains binary. It is NOT trained to predict multiclass categories.
+    Attack categories are post-hoc ground-truth subgroups.
+
+# ---- Post-Hoc Attack Subgroups --------------------------------------------
+subgroups:
+  attack_categories: ["DoS", "Probe", "R2L", "U2R"]
+  excluded_from_attack_dr: ["Normal"]
+
+# ---- Preprocessing (Identical to EXP-002) ----------------------------------
+preprocessing:
+  drop_metadata: ["difficulty"]           # LEAK-001 mitigation: never a feature
+  drop_constant: ["num_outbound_cmds"]    # LEAK-004 mitigation: zero-variance
+  categorical_features: ["protocol_type", "service", "flag"]
+  categorical_encoder: "OneHotEncoder(handle_unknown='ignore')"
+  binary_features: ["land", "logged_in", "root_shell", "su_attempted", "is_host_login", "is_guest_login"]
+  numerical_scaler: "StandardScaler"
+  fit_on: "training partition only"       # Strict leakage control
+
+# ---- Execution -----------------------------------------------------------
+random_seed: 42
+validation_split: 0.20   # 80/20 stratified split within KDDTrain+ for validation sanity check
+
+# ---- Models (Identical to EXP-002) ---------------------------------------
+models:
+  logistic_regression:
+    class: sklearn.linear_model.LogisticRegression
+    params: {solver: lbfgs, C: 1.0, max_iter: 1000, random_state: 42}
+  decision_tree:
+    class: sklearn.tree.DecisionTreeClassifier
+    params: {criterion: gini, max_depth: 20, random_state: 42}
+  random_forest:
+    class: sklearn.ensemble.RandomForestClassifier
+    params: {n_estimators: 100, random_state: 42, n_jobs: -1}
+
+# ---- Outputs -------------------------------------------------------------
+outputs:
+  results_dir: experiments/EXP-003/results/
+  category_distribution: experiments/EXP-003/results/category_distribution.csv
+  category_detection_results: experiments/EXP-003/results/category_detection_results.csv
+  report: experiments/EXP-003/results/experiment_report.md
+  figures:
+    category_dr: experiments/EXP-003/results/figures/attack_category_detection_rate.png
+    rep_vs_dr: experiments/EXP-003/results/figures/training_representation_vs_detection.png
+
+# ---- Constraints (Research Constitution) ---------------------------------
+constraints:
+  train_model: true
+  download_data: false
+  modify_raw_data: false
+  fabricate_results: false
+  use_difficulty_as_feature: false
+  use_test_set_for_model_selection: false
+  resample_data: false               # No SMOTE, ADASYN, over/undersampling
+  class_weight: null                 # Do not rebalance class weights
+  threshold_tuning: false            # Standard 0.5 decision threshold
+  multiclass_target: false           # Binary detector only
+
+notes: >
+  EXP-003 evaluates whether the overall binary Normal-vs-Attack performance from
+  EXP-002 conceals major detection rate disparities across attack categories
+  with vastly unequal training representation. No balancing or threshold
+  manipulations are performed.

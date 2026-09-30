@@ -1,0 +1,4 @@
+model,accuracy_pct,precision_pct,detection_rate_pct,false_alarm_rate_pct,f1_score_pct,roc_auc,train_time_s
+Logistic Regression,75.36,91.7,62.36,7.46,74.24,0.7973,4.87
+Decision Tree,78.73,91.27,69.26,8.75,78.76,0.8028,3.04
+Random Forest,77.22,96.79,62.04,2.72,75.61,0.9535,8.78

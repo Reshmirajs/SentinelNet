@@ -1,0 +1,13 @@
+model,category,sample_count,detection_rate_pct,precision_vs_normal_pct,f1_vs_normal_pct,tp_count,fn_count,normal_fp_count
+Logistic Regression,DoS,7460,81.92,89.41,85.5,6111,1349,724
+Logistic Regression,Probe,2421,76.17,71.81,73.92,1844,577,724
+Logistic Regression,R2L,2885,1.18,4.49,1.87,34,2851,724
+Logistic Regression,U2R,67,20.9,1.9,3.48,14,53,724
+Decision Tree,DoS,7460,83.7,88.02,85.8,6244,1216,850
+Decision Tree,Probe,2421,82.86,70.24,76.03,2006,415,850
+Decision Tree,R2L,2885,21.49,42.18,28.47,620,2265,850
+Decision Tree,U2R,67,26.87,2.07,3.85,18,49,850
+Random Forest,DoS,7460,80.16,95.77,87.27,5980,1480,264
+Random Forest,Probe,2421,74.85,87.28,80.59,1812,609,264
+Random Forest,R2L,2885,5.55,37.74,9.67,160,2725,264
+Random Forest,U2R,67,13.43,3.3,5.29,9,58,264

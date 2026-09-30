@@ -170,3 +170,10 @@ credentials.json
 *.pem
 *.key
 *.crt
+
+# -----------------------------------------------------------------------------
+# AI Agent Instructions — Keep locally, exclude from public GitHub repository
+# -----------------------------------------------------------------------------
+AGENTS.md
+CLAUDE.md
+

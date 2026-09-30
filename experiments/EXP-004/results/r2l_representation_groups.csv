@@ -1,0 +1,7 @@
+model,representation_status,test_sample_count,tp,fn,detection_rate_pct
+Logistic Regression,shared,2199,25,2174,1.14
+Logistic Regression,test_only,686,9,677,1.31
+Decision Tree,shared,2199,177,2022,8.05
+Decision Tree,test_only,686,443,243,64.58
+Random Forest,shared,2199,144,2055,6.55
+Random Forest,test_only,686,16,670,2.33

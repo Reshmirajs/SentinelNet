@@ -1,0 +1,127 @@
+# =============================================================================
+# SentinelNet — Experiment Configuration
+# Experiment ID : EXP-005
+# Title         : Threshold / Operating-Point Analysis
+# =============================================================================
+
+experiment_id: EXP-005
+title: "Threshold / Operating-Point Analysis"
+status: COMPLETE  # Verified execution: 2026-09-30T15:17:19Z — all outputs generated, 181/181 tests pass
+
+research_question: >
+  How does the classification threshold affect the trade-off between attack
+  detection rate and false-alarm rate for the SentinelNet binary classifiers?
+
+hypothesis: >
+  H5: Lowering the classification threshold will increase attack detection rate
+  while also increasing false-alarm rate, producing an observable
+  operating-point trade-off.
+
+phase: threshold_analysis
+type: operating_point_analysis
+follows_from: [EXP-002, EXP-003, EXP-004]
+
+# ---- Data ----------------------------------------------------------------
+dataset:
+  name: NSL-KDD
+  source: "https://www.unb.ca/cic/datasets/nsl.html"
+  files:
+    train: data/raw/KDDTrain+.txt
+    test:  data/raw/KDDTest+.txt
+  format: CSV (no header)
+  num_features: 41
+
+# ---- Binary Target --------------------------------------------------------
+target:
+  definition: "normal = 0 (Normal), all other labels = 1 (Attack)"
+  positive_class: 1
+  negative_class: 0
+
+# ---- Threshold Configuration ---------------------------------------------
+threshold:
+  grid_start: 0.00
+  grid_stop: 1.00
+  grid_step: 0.01
+  score_definition: "P(Attack) = predict_proba(X)[:, 1]"
+  prediction_rule: "prediction = 1 if attack_score >= threshold else 0"
+
+# ---- Threshold Selection Rule (PRE-SPECIFIED; must not use KDDTest+) ----
+threshold_selection_rule:
+  primary: >
+    Select the HIGHEST validation threshold that achieves a validation Detection
+    Rate (Recall) of at least 90%.
+  fallback: >
+    If no candidate threshold reaches 90% validation detection rate:
+    1. select the threshold with the highest validation Detection Rate;
+    2. if multiple thresholds tie, select the one with the lowest validation FAR;
+    3. if still tied, select the highest threshold.
+  data_used_for_selection: "20% KDDTrain+ validation partition only"
+  test_set_quarantined_until: "after threshold is frozen per model"
+
+# ---- Preprocessing & Models (Identical to EXP-002/EXP-003/EXP-004) -----
+preprocessing:
+  drop_metadata: ["difficulty"]
+  drop_constant: ["num_outbound_cmds"]
+  categorical_features: ["protocol_type", "service", "flag"]
+  categorical_encoder: "OneHotEncoder(handle_unknown='ignore')"
+  binary_features: ["land", "logged_in", "root_shell", "su_attempted", "is_host_login", "is_guest_login"]
+  numerical_scaler: "StandardScaler"
+  fit_on: "80% training partition only (100,778 rows)"
+
+random_seed: 42
+validation_split: 0.20   # 80/20 stratified split within KDDTrain+
+
+models:
+  logistic_regression:
+    class: sklearn.linear_model.LogisticRegression
+    params: {solver: lbfgs, C: 1.0, max_iter: 1000, random_state: 42}
+  decision_tree:
+    class: sklearn.tree.DecisionTreeClassifier
+    params: {criterion: gini, max_depth: 20, random_state: 42}
+  random_forest:
+    class: sklearn.ensemble.RandomForestClassifier
+    params: {n_estimators: 100, random_state: 42, n_jobs: -1}
+
+# ---- Outputs -------------------------------------------------------------
+outputs:
+  results_dir: experiments/EXP-005/results/
+  threshold_operating_point_results: experiments/EXP-005/results/threshold_operating_point_results.csv
+  validation_threshold_sweep: experiments/EXP-005/results/validation_threshold_sweep.csv
+  selected_thresholds: experiments/EXP-005/results/selected_thresholds.csv
+  report: experiments/EXP-005/results/experiment_report.md
+  figures:
+    threshold_vs_detection_far: experiments/EXP-005/results/figures/threshold_vs_detection_far.png
+    roc_curve_thresholds: experiments/EXP-005/results/figures/roc_curve_thresholds.png
+    default_vs_selected: experiments/EXP-005/results/figures/default_vs_selected_test_metrics.png
+
+# ---- Baseline Reference (EXP-002 default threshold = 0.50) -------------
+baseline_reference:
+  experiment: EXP-002
+  default_threshold: 0.50
+  source: experiments/EXP-002/results/metrics/summary_results.json
+  note: "EXP-002 is frozen; EXP-005 reads its results for comparison only."
+
+# ---- Constraints ---------------------------------------------------------
+constraints:
+  download_data: false
+  modify_raw_data: false
+  fabricate_results: false
+  use_difficulty_as_feature: false
+  use_test_set_for_threshold_selection: false
+  use_test_set_for_model_selection: false
+  resample_data: false
+  class_weight: null
+  claim_production_readiness: false
+  call_model_best: false
+  claim_causality: false
+  call_novel_attacks_zero_day: false
+  modify_EXP001: false
+  modify_EXP002: false
+  modify_EXP003: false
+  modify_EXP004: false
+
+notes: >
+  Final planned SentinelNet experiment. Investigates the operating-point
+  trade-off between attack detection and false-alarm rate across a 0.00–1.00
+  threshold grid (step 0.01). Threshold selected on validation partition only;
+  KDDTest+ quarantined until after threshold is frozen.

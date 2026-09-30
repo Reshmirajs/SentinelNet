@@ -1,0 +1,260 @@
+{
+  "experiment_id": "EXP-003",
+  "timestamp": "2026-09-30T14:09:51Z",
+  "random_seed": 42,
+  "environment": {
+    "python": "3.14.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pandas": "3.0.0",
+    "numpy": "2.4.2",
+    "scikit_learn": "1.8.0",
+    "matplotlib": "3.10.8"
+  },
+  "train_file": {
+    "path": "data/raw/KDDTrain+.txt",
+    "rows": 125973,
+    "sha256": "1b86d2f957b33082081bba410fe129b475efebcc13c9014c3f447c8271aadf95"
+  },
+  "test_file": {
+    "path": "data/raw/KDDTest+.txt",
+    "rows": 22544,
+    "sha256": "fa46b0935342616aa83b7c2578db355b6a7aaabbc492248172c7a1e8b7ab8f84"
+  },
+  "distribution": [
+    {
+      "category": "Normal",
+      "train_count": 67343,
+      "train_pct_of_total": 53.4583,
+      "train_pct_of_attacks": NaN,
+      "test_count": 9711,
+      "test_pct_of_total": 43.0758,
+      "test_pct_of_attacks": NaN,
+      "delta_total_pct_pp": -10.3825
+    },
+    {
+      "category": "DoS",
+      "train_count": 45927,
+      "train_pct_of_total": 36.4578,
+      "train_pct_of_attacks": 78.3336,
+      "test_count": 7460,
+      "test_pct_of_total": 33.0908,
+      "test_pct_of_attacks": 58.1314,
+      "delta_total_pct_pp": -3.367
+    },
+    {
+      "category": "Probe",
+      "train_count": 11656,
+      "train_pct_of_total": 9.2528,
+      "train_pct_of_attacks": 19.8806,
+      "test_count": 2421,
+      "test_pct_of_total": 10.739,
+      "test_pct_of_attacks": 18.8654,
+      "delta_total_pct_pp": 1.4862
+    },
+    {
+      "category": "R2L",
+      "train_count": 995,
+      "train_pct_of_total": 0.7899,
+      "train_pct_of_attacks": 1.6971,
+      "test_count": 2885,
+      "test_pct_of_total": 12.7972,
+      "test_pct_of_attacks": 22.4811,
+      "delta_total_pct_pp": 12.0073
+    },
+    {
+      "category": "U2R",
+      "train_count": 52,
+      "train_pct_of_total": 0.0413,
+      "train_pct_of_attacks": 0.0887,
+      "test_count": 67,
+      "test_pct_of_total": 0.2972,
+      "test_pct_of_attacks": 0.5221,
+      "delta_total_pct_pp": 0.2559
+    }
+  ],
+  "results": {
+    "Logistic Regression": {
+      "overall": {
+        "accuracy": 0.753637,
+        "precision": 0.917039,
+        "detection_rate": 0.623627,
+        "false_alarm_rate": 0.074555,
+        "f1_score": 0.742393,
+        "roc_auc": 0.79732,
+        "tp": 8003,
+        "tn": 8987,
+        "fp": 724,
+        "fn": 4830,
+        "train_time_s": 7.7477
+      },
+      "categories": {
+        "DoS": {
+          "category": "DoS",
+          "sample_count": 7460,
+          "tp": 6111,
+          "fn": 1349,
+          "detection_rate": 0.819169,
+          "precision_against_normal": 0.894075,
+          "f1_against_normal": 0.854984,
+          "fp_normal": 724,
+          "tn_normal": 8987
+        },
+        "Probe": {
+          "category": "Probe",
+          "sample_count": 2421,
+          "tp": 1844,
+          "fn": 577,
+          "detection_rate": 0.761669,
+          "precision_against_normal": 0.718069,
+          "f1_against_normal": 0.739226,
+          "fp_normal": 724,
+          "tn_normal": 8987
+        },
+        "R2L": {
+          "category": "R2L",
+          "sample_count": 2885,
+          "tp": 34,
+          "fn": 2851,
+          "detection_rate": 0.011785,
+          "precision_against_normal": 0.044855,
+          "f1_against_normal": 0.018666,
+          "fp_normal": 724,
+          "tn_normal": 8987
+        },
+        "U2R": {
+          "category": "U2R",
+          "sample_count": 67,
+          "tp": 14,
+          "fn": 53,
+          "detection_rate": 0.208955,
+          "precision_against_normal": 0.01897,
+          "f1_against_normal": 0.034783,
+          "fp_normal": 724,
+          "tn_normal": 8987
+        }
+      }
+    },
+    "Decision Tree": {
+      "overall": {
+        "accuracy": 0.787305,
+        "precision": 0.912713,
+        "detection_rate": 0.692589,
+        "false_alarm_rate": 0.08753,
+        "f1_score": 0.787559,
+        "roc_auc": 0.802826,
+        "tp": 8888,
+        "tn": 8861,
+        "fp": 850,
+        "fn": 3945,
+        "train_time_s": 3.318
+      },
+      "categories": {
+        "DoS": {
+          "category": "DoS",
+          "sample_count": 7460,
+          "tp": 6244,
+          "fn": 1216,
+          "detection_rate": 0.836997,
+          "precision_against_normal": 0.88018,
+          "f1_against_normal": 0.858046,
+          "fp_normal": 850,
+          "tn_normal": 8861
+        },
+        "Probe": {
+          "category": "Probe",
+          "sample_count": 2421,
+          "tp": 2006,
+          "fn": 415,
+          "detection_rate": 0.828583,
+          "precision_against_normal": 0.702381,
+          "f1_against_normal": 0.76028,
+          "fp_normal": 850,
+          "tn_normal": 8861
+        },
+        "R2L": {
+          "category": "R2L",
+          "sample_count": 2885,
+          "tp": 620,
+          "fn": 2265,
+          "detection_rate": 0.214905,
+          "precision_against_normal": 0.421769,
+          "f1_against_normal": 0.28473,
+          "fp_normal": 850,
+          "tn_normal": 8861
+        },
+        "U2R": {
+          "category": "U2R",
+          "sample_count": 67,
+          "tp": 18,
+          "fn": 49,
+          "detection_rate": 0.268657,
+          "precision_against_normal": 0.020737,
+          "f1_against_normal": 0.038503,
+          "fp_normal": 850,
+          "tn_normal": 8861
+        }
+      }
+    },
+    "Random Forest": {
+      "overall": {
+        "accuracy": 0.772179,
+        "precision": 0.967903,
+        "detection_rate": 0.620354,
+        "false_alarm_rate": 0.027186,
+        "f1_score": 0.756102,
+        "roc_auc": 0.953461,
+        "tp": 7961,
+        "tn": 9447,
+        "fp": 264,
+        "fn": 4872,
+        "train_time_s": 8.3947
+      },
+      "categories": {
+        "DoS": {
+          "category": "DoS",
+          "sample_count": 7460,
+          "tp": 5980,
+          "fn": 1480,
+          "detection_rate": 0.801609,
+          "precision_against_normal": 0.957719,
+          "f1_against_normal": 0.872738,
+          "fp_normal": 264,
+          "tn_normal": 9447
+        },
+        "Probe": {
+          "category": "Probe",
+          "sample_count": 2421,
+          "tp": 1812,
+          "fn": 609,
+          "detection_rate": 0.748451,
+          "precision_against_normal": 0.872832,
+          "f1_against_normal": 0.805871,
+          "fp_normal": 264,
+          "tn_normal": 9447
+        },
+        "R2L": {
+          "category": "R2L",
+          "sample_count": 2885,
+          "tp": 160,
+          "fn": 2725,
+          "detection_rate": 0.055459,
+          "precision_against_normal": 0.377358,
+          "f1_against_normal": 0.096706,
+          "fp_normal": 264,
+          "tn_normal": 9447
+        },
+        "U2R": {
+          "category": "U2R",
+          "sample_count": 67,
+          "tp": 9,
+          "fn": 58,
+          "detection_rate": 0.134328,
+          "precision_against_normal": 0.032967,
+          "f1_against_normal": 0.052941,
+          "fp_normal": 264,
+          "tn_normal": 9447
+        }
+      }
+    }
+  }
+}

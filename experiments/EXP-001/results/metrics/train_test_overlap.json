@@ -1,0 +1,90 @@
+{
+  "train_unique_labels": 23,
+  "test_unique_labels": 38,
+  "shared_labels_count": 21,
+  "shared_labels": [
+    "back",
+    "buffer_overflow",
+    "ftp_write",
+    "guess_passwd",
+    "imap",
+    "ipsweep",
+    "land",
+    "loadmodule",
+    "multihop",
+    "neptune",
+    "nmap",
+    "normal",
+    "perl",
+    "phf",
+    "pod",
+    "portsweep",
+    "rootkit",
+    "satan",
+    "smurf",
+    "teardrop",
+    "warezmaster"
+  ],
+  "train_only_labels": [
+    "spy",
+    "warezclient"
+  ],
+  "test_only_labels": [
+    "apache2",
+    "httptunnel",
+    "mailbomb",
+    "mscan",
+    "named",
+    "processtable",
+    "ps",
+    "saint",
+    "sendmail",
+    "snmpgetattack",
+    "snmpguess",
+    "sqlattack",
+    "udpstorm",
+    "worm",
+    "xlock",
+    "xsnoop",
+    "xterm"
+  ],
+  "unique_overlapping_patterns": 610,
+  "total_overlapping_test_samples": 610,
+  "total_overlapping_test_pct": 2.7058,
+  "exact_row_overlap_count": 610,
+  "exact_row_overlap_pct_of_test": 2.7058,
+  "train_category_pct": {
+    "Normal": 53.4583,
+    "DoS": 36.4578,
+    "Probe": 9.2528,
+    "R2L": 0.7899,
+    "U2R": 0.0413
+  },
+  "test_category_pct": {
+    "Normal": 43.0758,
+    "DoS": 33.0908,
+    "R2L": 12.7972,
+    "Probe": 10.739,
+    "U2R": 0.2972
+  },
+  "train_difficulty_stats": {
+    "count": 125973.0,
+    "mean": 19.5041,
+    "std": 2.2915,
+    "min": 0.0,
+    "25%": 18.0,
+    "50%": 20.0,
+    "75%": 21.0,
+    "max": 21.0
+  },
+  "test_difficulty_stats": {
+    "count": 22544.0,
+    "mean": 18.018,
+    "std": 4.2704,
+    "min": 0.0,
+    "25%": 17.0,
+    "50%": 20.0,
+    "75%": 21.0,
+    "max": 21.0
+  }
+}

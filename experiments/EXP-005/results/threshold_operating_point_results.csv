@@ -1,0 +1,4 @@
+model,default_threshold,selected_threshold,default_accuracy,selected_accuracy,default_precision,selected_precision,default_detection_rate,selected_detection_rate,default_far,selected_far,default_f1,selected_f1,roc_auc,default_tp,default_tn,default_fp,default_fn,selected_tp,selected_tn,selected_fp,selected_fn
+Logistic Regression,0.5,0.94,75.36,71.84,91.7,92.07,62.36,55.29,7.46,6.29,74.24,69.09,0.79732,8003,8987,724,4830,7095,9100,611,5738
+Decision Tree,0.5,1.0,78.73,78.73,91.27,91.27,69.26,69.25,8.75,8.75,78.76,78.75,0.802826,8888,8861,850,3945,8887,8861,850,3946
+Random Forest,0.5,1.0,77.22,68.02,96.79,98.67,62.04,44.42,2.72,0.79,75.61,61.26,0.953461,7961,9447,264,4872,5700,9634,77,7133
